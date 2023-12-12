@@ -6,3 +6,6 @@ beautifulsoup4==4.10.0
 Werkzeug==2.1.1 
 opencv-python==4.5.3.56 
 requests==2.26.0
+numpy==1.21.4 
+pip==21.2.4
+setuptools==58.4.0
