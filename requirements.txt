@@ -1,4 +1,4 @@
 Flask==2.0.1
 gunicorn==20.1.0
-werkzeug==2.1.1
-Pillow==8.3.2  # Replace with the latest version available
+Pillow==8.3.2
+pytesseract==0.3.8
