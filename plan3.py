@@ -1,9 +1,12 @@
+from flask import Flask, request, jsonify
 from PIL import Image
 import pytesseract as pyt
 import cv2
 import numpy as np
 import requests
 from io import BytesIO
+
+app = Flask(__name__)
 
 # Set the path to the Tesseract binary in your system
 pyt.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
@@ -33,11 +36,24 @@ def ocr_image(image_url):
         print(f"Error processing the image: {e}")
         return ""
 
-if __name__ == '__main__':
-    # Replace the placeholder URL with the actual image URL
-    image_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/%E0%AE%9A%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81%2C_%E0%AE%A4%E0%AF%8A._%E0%AE%AE%E0%AF%81._%E0%AE%9A%E0%AE%BF._%E0%AE%B0%E0%AE%95%E0%AF%81%E0%AE%A8%E0%AE%BE%E0%AE%A4%E0%AE%A9%E0%AF%8D.pdf/page18-1034px-%E0%AE%9A%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81%2C_%E0%AE%A4%E0%AF%8A._%E0%AE%AE%E0%AF%81._%E0%AE%9A%E0%AE%BF._%E0%AE%B0%E0%AE%95%E0%AF%81%E0%AE%A8%E0%AE%BE%E0%AE%A4%E0%AE%A9%E0%AF%8D.pdf.jpg"
-    
-    # Call the OCR function and store the result
-    result = ocr_image(image_url)
+@app.route('/process_image', methods=['POST'])
+def process_image():
+    try:
+        # Get the image URL from the request JSON data
+        data = request.json
+        image_url = data.get('image_url')
 
-    # The extracted text is also available in the 'result' variable if needed for further processing
+        if not image_url:
+            return jsonify({"error": "Please provide the 'image_url' parameter in the request JSON."}), 400
+
+        # Call the OCR function and store the result
+        result = ocr_image(image_url)
+
+        # Return the extracted text as JSON response
+        return jsonify({"extracted_text": result})
+
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {e}"}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
