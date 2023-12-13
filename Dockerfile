@@ -11,7 +11,7 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set the Tesseract path explicitly
-RUN apt-get update && apt-get install -y tesseract-ocr
+RUN apt-get update && apt-get install -y tesseract-ocr=4.1.1
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
