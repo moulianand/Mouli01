@@ -1,0 +1,6 @@
+,voter_id,Name,Gender,Zone,City,Number,hasVoted
+0,10001,Deep,Male,West,Gandhinagar,,1
+1,10002,Prachi,Female,South,Surat,,1
+2,10003,Het,Male,East,Surat,,1
+3,10004,Shivanshi,Female,East,Gandhinagar,,1
+4,10005,Rohan,Male,North,Bengaluru,,1

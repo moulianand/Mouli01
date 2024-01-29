@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			/* background-color: #f2f2f2; */
+		}
+
+		.container {
+			max-width: 800px;
+			margin: auto;
+			padding: 20px;
+			/* background-color: #fff; */
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+		}
+
+		h1 {
+			font-size: 36px;
+			margin-top: 0;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+
+		.candidate {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.candidate img {
+			width: 100px;
+			height: 100px;
+			margin-right: 20px;
+			/* object-fit: cover; */
+			border-radius: 50%;
+			box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+		}
+
+		.candidate label {
+			font-size: 20px;
+			font-weight: bold;
+		}
+
+		.candidate input[type="radio"] {
+			margin-right: 10px;
+		}
+
+		button[type="submit"] {
+			display: block;
+			margin: 20px auto 0;
+			padding: 10px 20px;
+			font-size: 24px;
+			font-weight: bold;
+			color: #fff;
+			background-color: #4CAF50;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		button[type="submit"]:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{{ url_for('homepage_get') }}">Home</a>
+            </div>
+        </nav>
+
+		<!-- Candidate List -->
+		<div class="container">
+			<h1>Vote for Your Candidate</h1>
+	
+			<form action="/voter/voteCast" method="POST">
+				<div class="candidate">
+					<img src="{{ url_for('static', filename='images/bjp.png') }}">
+					<label for="bjp">Narendra Modi</label>
+					<input type="radio" name="candidate" id="bjp" value="bjp">
+				</div>
+	
+				<div class="candidate">
+					<img src="{{ url_for('static', filename='images/cong.jpg') }}">
+					<label for="cong">Rahul Gandhi</label>
+					<input type="radio" name="candidate" id="cong" value="cong">
+				</div>
+	
+				<div class="candidate">
+					<img src="{{ url_for('static', filename='images/aap.png') }}">
+					<label for="aap">Arvind Kejriwal</label>
+					<input type="radio" name="candidate" id="aap" value="aap">
+				</div>
+	
+				<div class="candidate">
+					<img src="{{ url_for('static', filename='images/ss.png') }}">
+					<label for="ss">Udhav Thakrey</label>
+					<input type="radio" name="candidate" id="ss" value="ss">
+				</div>
+
+				<div class="candidate">
+					<img src="{{ url_for('static', filename='images/nota.jpg') }}">
+					<label for="nota">NOTA</label>
+					<input type="radio" name="candidate" id="nota" value="nota">
+				</div>
+	
+				<button type="submit" onclick="{{ url_for('votcastPage') }}">Vote</button>
+			</form>
+		</div>
+
+	</div>
+	
+</body>
+</html>
